@@ -6,11 +6,14 @@ covi_19_api_url = "https://covid-19-tracking.p.rapidapi.com/v1/"
 
 # I'm supplying my dummy account api key here
 # get yours here = https://rapidapi.com/slotixsro-slotixsro-default/api/covid-19-tracking
-os.environ['covid19key_key'] = "fe52edfd5emsha37d6405164886ap13df09jsnf99c470513c2" # set your key here or set it manually on the command line
+# set your key here or set it manually on the command line
+
+# uncomment this and supply your key or manually set it on terminal
+# os.environ['covid19mini_key'] = "" 
 
 request_headers = {
     'x-rapidapi-host': "covid-19-tracking.p.rapidapi.com",
-    'x-rapidapi-key': os.getenv('covid19key_key') 
+    'x-rapidapi-key': os.getenv('covid19mini_key') 
 }
 
 def request_api(country = ""): 
