@@ -3,10 +3,19 @@ from tkinter import *
 from tkinter import ttk
 from utils.req import *
 from PIL import Image, ImageTk
+import re
 
 # Function definitions
 def make_request(country):
-	error_label.pack_forget() # clear error message
+	# clear error message
+	error_label.pack_forget() 
+	input_error_label.pack_forget() 
+	# validate string 
+	match = re.search(r'^\S\D\w\D+(\s?\D\w\D+)*$', country, re.I)
+	if not match: 
+		input_error_label.pack(fill="both", expand=True)
+		return
+	# if all is well, fetch information 
 	response = request_api(country)
 	if response.get('success'):
 		data = response.get('data')
@@ -134,7 +143,7 @@ label_total_recovered = Label(information_frame, textvariable=information_labels
 label_total_recovered.place(relx=0.50, rely=0.75, relheight=LABEL_HEIGHT, relwidth=LABEL_WIDTH)
 
 error_label = Label(information_frame, bg="#f0b27a", text='Something went wrong, please try again!')
-
+input_error_label = Label(information_frame, bg="#f4d03f", text='Invalid input, please enter valid word characters \n only without numbers (i.e. Philippines, United States). \n NOTE: THERE SHOULD BE NO SPACE/S AROUND THE INPUT')
 # BOTTOM FRAME
 bottom_frame = Frame(screen_frame, bg = BOTTOM_FRAME_COLOR)
 bottom_frame.place(relx=0, rely=0.95, relheight=0.05, relwidth=1)
